@@ -47,3 +47,12 @@ button {
    height: 30px;
    margin: 10px 0;
 }
+
+launchStatusReady {
+   color: green;
+}
+
+launchStatusNotReady {
+   color: red;
+}
+
