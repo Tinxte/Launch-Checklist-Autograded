@@ -18,6 +18,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
+    let output ="";
     if(testInput === "") {
        let output = "Empty"
     } else if (typeof(testInput === Number)) {
@@ -28,11 +29,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         return output
  }
  
- function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+ function formSubmission(doc, list, pilot, copilot, fuelLevel, cargoLevel) {
 
-    const faultyItems = document.querySelector("#faultyItems");
+    const faultyItems = document.getElementById("faultyItems");
     let newList = "";
-    const launchStatus = document.querySelector("#launchStatus");
+    const launchStatus = document.getElementById("launchStatus");
     let launchStatusID = "launchStatus";
     let status = "Awaiting Information Before Launch";
     let visibility = "hidden";
@@ -40,8 +41,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     //Pilot & Copilot status
 
-    const pilotStatus = document.querySelector("#pilotStatus");
-    const copilotStatus = document.querySelector("#copilotStatus");
+    const pilotStatus = document.getElementById("#pilotStatus");
+    const copilotStatus = document.getElementById("#copilotStatus");
 
     let pilotName = pilot;
     let copilotName = copilot;
@@ -51,6 +52,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let fuelStatus = "Fuel level high enough for launch";
 
     if (fuelLevel < 10000) {
+        console.log("Debugging: fuel under 10000");
         visibility = "visible";
         fuelStatus = "Not enough fuel for launch";
         launchStatusID = "launchStatusNotReady";
@@ -58,9 +60,24 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
 
 
-    //TODO Cargo Mass
+    //Cargo Mass
 
-    //cargo mass code here
+    let cargoStatus = "Cargo mass low enough for launch";
+
+    if (cargoLevel > 10000) {
+        visibility = "visible";
+        cargoStatus = "Cargo mass too high for take off"
+        launchStatusID = "launchStatusNotReady";
+        status = "Shuttle not ready for launch";
+    }
+
+    //Shuttle ready for launch if above checks passed
+
+    if (launchStatusID === "launchStatus") {
+        launchStatusID = "launchStatusReady";
+        status = "Shuttle is ready for launch.";
+    }
+
 
     // New HTML content with updated variables
 
@@ -78,7 +95,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     //Update HTML with new content
 
     launchStatus.innerHTML = newStatus;
-    faultyItems.innerHTML = list;
+    faultyItems.innerHTML = newList;
 
 }
  
@@ -93,6 +110,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
  function pickPlanet(planets) {
  }
+
+
  
  module.exports.addDestinationInfo = addDestinationInfo;
  module.exports.validateInput = validateInput;
