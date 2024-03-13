@@ -2,19 +2,24 @@
 
 require('cross-fetch/polyfill');
 
-function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
+function addDestinationInfo(doc, name, diameter, star, distance, moons, imageUrl) {
+
+    const missionTarget = document.getElementById("missionTarget");
+    let destinationInfo = "";
+
+
+    destinationInfo = `<h2>Mission Destination</h2>
+    <ol>
+        <li>Name: ${name}</li>
+        <li>Diameter: ${diameter}</li>
+        <li>Star: ${star}</li>
+        <li>Distance from Earth: ${distance}</li>
+        <li>Number of Moons: ${moons}</li>
+    </ol>
+    <img src="${imageUrl}">`
+    
+    missionTarget.innerHTML = destinationInfo;
+    
  }
  
  function validateInput(testInput) {
@@ -31,6 +36,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
  function formSubmission(doc, list, pilot, copilot, fuelLevel, cargoLevel) {
 
+console.log("function formSubmission running now...");
+
     const faultyItems = document.getElementById("faultyItems");
     let newList = "";
     const launchStatus = document.getElementById("launchStatus");
@@ -38,6 +45,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let status = "Awaiting Information Before Launch";
     let visibility = "hidden";
 
+ 
 
     //Pilot & Copilot status
 
@@ -46,6 +54,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     let pilotName = pilot;
     let copilotName = copilot;
+
+    console.log(" pilot name, copilot name, typeOf pilot name: ");
+    console.log(pilot);
+    console.log(copilot);
+    console.log(typeof(pilotName));
+
+
+
+       // one way to do it but might break tests
+if (pilot === "Empty") {
+    alert("input cannot be empty")
+    console.log("debugging for empty pilot.value")
+}
 
     //Fuel level and status
 
@@ -102,13 +123,17 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  async function myFetch() {
      let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
-         });
+     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+    });
  
      return planetsReturned;
  }
  
  function pickPlanet(planets) {
+    //random number 
+        let num = Math.floor(Math.random() * planets.length)
+    //return planets[randomNumber];
+    return planets[num];
  }
 
 
