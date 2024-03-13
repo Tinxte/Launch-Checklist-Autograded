@@ -125,7 +125,7 @@ if (pilot === "Empty") {
  
      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
     });
- 
+    
      return planetsReturned;
  }
  

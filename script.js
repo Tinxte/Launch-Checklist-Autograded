@@ -6,14 +6,6 @@ window.addEventListener("load", function() {
 
         console.log("window loaded");
 
-    // let submission = document.getElementById("formSubmit");
-    // submission.addEventListener("click", function(event) {
-    //     window.alert("clicked!");
-    //     console.log("button pushed!");
-    //     // ;
-        
-    // });
-
     let list = this.document.getElementById("faultyItems");
     // let pilotName = document.getElementById("input[name=pilotName]");
     let copilotName = document.querySelector("copilotName");
