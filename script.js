@@ -19,9 +19,10 @@ window.addEventListener("load", function() {
 
     let form = document.getElementById("testForm");
     form.addEventListener("submit", function (event) {
-            let pilotName = document.querySelector("input[name=pilotName]");
-console.log(`pilotName in script.js = ${pilotName}`);
+
         formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoMass) 
+        // let pilotName = document.querySelector("input[name=pilotName]");
+        // console.log(`pilotName in script.js = ${pilotName}`);
         console.log("button being pushed");
     
     });

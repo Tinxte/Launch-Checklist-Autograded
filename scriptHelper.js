@@ -22,39 +22,42 @@ function addDestinationInfo(doc, name, diameter, star, distance, moons, imageUrl
     
  }
  
+
  function validateInput(testInput) {
-    let output ="";
-    if(testInput === "") {
-       let output = "Empty"
-    } else if (typeof(testInput === Number)) {
-        let output = "Is a Number"
-    } else if (isNaN(testInput) === true) {
-        let output = "Not a Number"
+    let numberInput = Number(testInput);
+    if (testInput === "") {
+        return "Empty";
+    } else if (isNaN(numberInput)) {
+        return "Not a Number";
+    } else if (isNaN(numberInput) === false) {
+        return "Is a Number";
     }
-        return output
- }
+ } 
  
- function formSubmission(doc, list, pilot, copilot, fuelLevel, cargoLevel) {
+ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
 console.log("function formSubmission running now...");
 
-    const faultyItems = document.getElementById("faultyItems");
+    const faultyItems = this.document.getElementById("faultyItems");
     let newList = "";
-    const launchStatus = document.getElementById("launchStatus");
+    const launchStatus = this.document.getElementById("launchStatus");
     let launchStatusID = "launchStatus";
     let status = "Awaiting Information Before Launch";
     let visibility = "hidden";
 
- 
+    let fuel = document.getElementById("fuelStatus");
+    let cargo = document.getElementById("cargoStatus");
+    let pilotStatus = document.getElementById("pilotStatus");
+    let copilotStatus = document.getElementById("copilotStatus")
+
+    //note: phillip said list parameter refers to faultyItems
 
     //Pilot & Copilot status
-
-    const pilotStatus = document.getElementById("#pilotStatus");
-    const copilotStatus = document.getElementById("#copilotStatus");
 
     let pilotName = pilot;
     let copilotName = copilot;
 
+    // debugging
     console.log(" pilot name, copilot name, typeOf pilot name: ");
     console.log(pilot);
     console.log(copilot);
@@ -62,10 +65,10 @@ console.log("function formSubmission running now...");
 
 
 
-       // one way to do it but might break tests
-if (pilot === "Empty") {
-    alert("input cannot be empty")
-    console.log("debugging for empty pilot.value")
+if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
+       alert("All fields required!");
+} else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number" ) {
+       alert("Please enter valid information for each field!");
 }
 
     //Fuel level and status
