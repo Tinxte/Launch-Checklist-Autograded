@@ -2,7 +2,7 @@
 
 require('cross-fetch/polyfill');
 
-function addDestinationInfo(doc, name, diameter, star, distance, moons, imageUrl) {
+function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
 
     const missionTarget = document.getElementById("missionTarget");
     let destinationInfo = "";
@@ -39,12 +39,11 @@ function addDestinationInfo(doc, name, diameter, star, distance, moons, imageUrl
 
 console.log("debugging: function formSubmission running now...");
 
-    const faultyItems = this.document.getElementById("faultyItems");
-    const launchStatus = this.document.getElementById("launchStatus");
+    const launchStatus = document.getElementById("launchStatus");
     let launchStatusID = "launchStatus";
     let status = "Awaiting Information Before Launch";
-    let visibility = "hidden";
-
+    let visibility = "visible";
+//looks good ^ v
     let fuel = document.getElementById("fuelStatus");
     let cargo = document.getElementById("cargoStatus");
     let pilotStatus = document.getElementById("pilotStatus");
@@ -65,62 +64,96 @@ console.log("debugging: function formSubmission running now...");
 
     // Input Validation
 
-    if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
-        alert("All fields required!");
-    } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number" ) {
-        alert("Please enter valid information for each field!");
-    }
+    if (validateInput(pilot) === "Empty" ||
+        validateInput(copilot) === "Empty" ||
+        validateInput(fuelLevel) === "Empty" ||
+        validateInput(cargoLevel) === "Empty") {
+        return alert("All fields required!");
+    } else if (validateInput(pilot) === "Is a Number" ||
+        validateInput(copilot) === "Is a Number" ||
+        validateInput(fuelLevel) === "Not a Number" ||
+        validateInput(cargoLevel) === "Not a Number" ) {
+        return alert("Please enter valid information for each field!");
+    } else {
+
+    //put else {} for the rest, or change alert to "return alert" ^
+
+    //make list visible so you can see pilot
+    // pilotstatsu text ready for launch value updated
+    // pilotStatus.innerHTML = `pilot ${} is ready for launch`
+    // copilot ready launch
+    // 
+
+    // Update list visibility after input validated
+
+        list.style.visibility= "visible"
+
 
     //Fuel level and status
 
-    let fuelStatus = "Fuel level high enough for launch";
+    // let fuelStatus = "Fuel level high enough for launch";
 
-    if (fuelLevel < 10000) {
-        console.log("Debugging: fuel under 10000");
-        visibility = "visible";
-        fuelStatus = "Not enough fuel for launch";
-        launchStatusID = "launchStatusNotReady";
-        status = "Shuttle not ready for launch";
-    }
+    // if (fuelLevel < 10000) {
+    //     console.log("Debugging: fuel under 10000");
+    //     fuelStatus = "Not enough fuel for launch";
+    //     launchStatusID = "launchStatusNotReady";
+    //     status = "Shuttle not ready for launch";
+    //     launchStatus.innerHTML = `Shuttle Not Ready For Launch`
+    // }
 
 
     //Cargo Mass
 
-    let cargoStatus = "Cargo mass low enough for launch";
+    // let cargoStatus = "Cargo mass low enough for launch";
 
-    if (cargoLevel > 10000) {
-        visibility = "visible";
-        cargoStatus = "Cargo mass too high for take off"
-        launchStatusID = "launchStatusNotReady";
-        status = "Shuttle not ready for launch";
+    // if (cargoLevel > 10000) {
+    //     cargoStatus = "Cargo mass too high for take off"
+    //     launchStatusID = "launchStatusNotReady";
+    //     status = "Shuttle not ready for launch";
+    // }
+
+    // //Shuttle ready for launch if above checks passed
+
+    // if (launchStatusID === "launchStatus") {
+    //     launchStatusID = "launchStatusReady";
+    //     status = "Shuttle is ready for launch.";
+    // }
+
+    if (fuelLevel < 10000 && cargoLevel > 10000) {
+        launchStatus.innerHTML = "Shuttle Not Ready For Launch";
+        launchStatus.style.color = "#FF0000";
+        fuel.innerHTML = "Not enough fuel for launch"
+        cargo.innerHTML = "Cargo mass too high for take off"
+        console.log("debugging: option 1")
+    } else if (fuelLevel > 10000 && cargoLevel > 10000) {
+        launchStatus.innerHTML = "Shuttle Not Ready For Launch";
+        launchStatus.style.color = "#FF0000";
+        fuel.innerHTML = "Fuel level high enough for launch"
+        cargo.innerHTML = "Cargo mass too high for take off"
+        console.log("debugging: option 2");
+
     }
-
-    //Shuttle ready for launch if above checks passed
-
-    if (launchStatusID === "launchStatus") {
-        launchStatusID = "launchStatusReady";
-        status = "Shuttle is ready for launch.";
-    }
-
 
     // New HTML content with updated variables
 
-    let newStatus = `<h2 id="${launchStatusID}" data-testid="launchStatus">${status}</h2>`
 
-    let newList = `<div id="faultyItems" style="visibility: ${visibility}">
-    <ol>
-        <li id="pilotStatus" data-testid="pilotStatus">Pilot ${pilotName} Ready</li>
-        <li id="copilotStatus" data-testid="copilotStatus">Co-pilot ${copilotName} Ready</li>
-        <li id="fuelStatus" data-testid="fuelStatus">${fuelStatus}</li>
-        <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
-    </ol>
-</div>`
+    // let newStatus = `<h2 id="${launchStatusID}" data-testid="launchStatus">${status}</h2>`
+
+//     let newList = `<div id="faultyItems" style="visibility: ${visibility}">
+//     <ol>
+//         <li id="pilotStatus" data-testid="pilotStatus">Pilot ${pilotName} Ready</li>
+//         <li id="copilotStatus" data-testid="copilotStatus">Co-pilot ${copilotName} Ready</li>
+//         <li id="fuelStatus" data-testid="fuelStatus">${fuelStatus}</li>
+//         <li id="cargoStatus" data-testid="cargoStatus">${cargoStatus}</li>
+//     </ol>
+// </div>`
 
     //Update HTML with new content
 
-    launchStatus.innerHTML = newStatus;
-    faultyItems.innerHTML = newList;
+    // launchStatus.innerHTML = newStatus;
+    // list.innerHTML = newList;
 
+}
 }
  
  async function myFetch() {
@@ -128,7 +161,9 @@ console.log("debugging: function formSubmission running now...");
  
      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
     });
-    
+    if(response.status >= 400) {
+        throw new Error("Bad Response")
+    } else return response.json();
      return planetsReturned;
  }
  
