@@ -48,11 +48,11 @@ button {
    margin: 10px 0;
 }
 
-launchStatusReady {
+#launchStatusReady {
    color: green;
 }
 
-launchStatusNotReady {
+#launchStatusNotReady {
    color: red;
 }
 

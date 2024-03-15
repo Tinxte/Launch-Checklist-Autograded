@@ -34,12 +34,12 @@ function addDestinationInfo(doc, name, diameter, star, distance, moons, imageUrl
     }
  } 
  
+
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
-console.log("function formSubmission running now...");
+console.log("debugging: function formSubmission running now...");
 
     const faultyItems = this.document.getElementById("faultyItems");
-    let newList = "";
     const launchStatus = this.document.getElementById("launchStatus");
     let launchStatusID = "launchStatus";
     let status = "Awaiting Information Before Launch";
@@ -58,18 +58,18 @@ console.log("function formSubmission running now...");
     let copilotName = copilot;
 
     // debugging
-    console.log(" pilot name, copilot name, typeOf pilot name: ");
+    console.log("debugging- pilot name, copilot name, typeOf pilot name: ");
     console.log(pilot);
     console.log(copilot);
     console.log(typeof(pilotName));
 
+    // Input Validation
 
-
-if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
-       alert("All fields required!");
-} else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number" ) {
-       alert("Please enter valid information for each field!");
-}
+    if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
+        alert("All fields required!");
+    } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number" ) {
+        alert("Please enter valid information for each field!");
+    }
 
     //Fuel level and status
 
@@ -105,9 +105,9 @@ if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || va
 
     // New HTML content with updated variables
 
-    newStatus = `<h2 id="${launchStatusID}" data-testid="launchStatus">${status}</h2>`
+    let newStatus = `<h2 id="${launchStatusID}" data-testid="launchStatus">${status}</h2>`
 
-    newList = `<div id="faultyItems" style="visibility: ${visibility}">
+    let newList = `<div id="faultyItems" style="visibility: ${visibility}">
     <ol>
         <li id="pilotStatus" data-testid="pilotStatus">Pilot ${pilotName} Ready</li>
         <li id="copilotStatus" data-testid="copilotStatus">Co-pilot ${copilotName} Ready</li>
