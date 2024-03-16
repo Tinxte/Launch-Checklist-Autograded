@@ -37,13 +37,8 @@ window.addEventListener("load", function() {
         console.log("button being pushed");
     
     });
-       
-    // window.alert("clicked!");
-    // console.log("button pushed!");
 
-
-
-    console.log("this prints after the submission event listener");
+    console.log("debugging: this prints after the submission event listener");
 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
@@ -59,6 +54,7 @@ window.addEventListener("load", function() {
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
         let selectedplanet = pickPlanet(listedPlanets);
         // addDestinationInfo(document, selectedplanet.name...)
+        addDestinationInfo(document, selectedplanetname, selectedplanet.diameter, selectedplanet.star, selectedplanet.distance, selectedplanet.moons, selectedplanet.imageUrl)
     })
     
     //NOTES TO EXPLORE
@@ -71,7 +67,5 @@ window.addEventListener("load", function() {
     // "I got the inputs as an array with the class selector and just 
     // separated them out into individual variables by index"
 
-    // // let list = this.document.getElementById("faultyItems")
-    //eventListener
-    // event.preventDefault();
+
  });
