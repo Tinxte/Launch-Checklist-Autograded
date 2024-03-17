@@ -12,19 +12,16 @@ function addDestinationInfo(
   imageUrl
 ) {
   const missionTarget = document.getElementById("missionTarget");
-  let destinationInfo = "";
 
-  destinationInfo = `<h2>Mission Destination</h2>
-    <ol>
-        <li>Name: ${name}</li>
-        <li>Diameter: ${diameter}</li>
-        <li>Star: ${star}</li>
-        <li>Distance from Earth: ${distance}</li>
-        <li>Number of Moons: ${moons}</li>
-    </ol>
-    <img src="${imageUrl}">`;
-
-  missionTarget.innerHTML = destinationInfo;
+  missionTarget.innerHTML = `<h2>Mission Destination</h2>
+  <ol>
+      <li>Name: ${name}</li>
+      <li>Diameter: ${diameter}</li>
+      <li>Star: ${star}</li>
+      <li>Distance from Earth: ${distance}</li>
+      <li>Number of Moons: ${moons}</li>
+  </ol>
+  <img src="${imageUrl}">`;
 }
 
 function validateInput(testInput) {
@@ -42,16 +39,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   console.log("debugging: function formSubmission running now...");
 
   const launchStatus = document.getElementById("launchStatus");
-  let launchStatusID = "launchStatus";
-  let status = "Awaiting Information Before Launch";
-  let visibility = "visible";
-  //looks good ^ v
+
   let fuel = document.getElementById("fuelStatus");
   let cargo = document.getElementById("cargoStatus");
   let pilotStatus = document.getElementById("pilotStatus");
   let copilotStatus = document.getElementById("copilotStatus");
-
-  //note: phillip said list parameter refers to faultyItems
 
   // Input Validation
 
@@ -70,7 +62,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   ) {
     return alert("Please enter valid information for each field!");
   } else {
-
+    // Update list visibility after input validated
     list.style.visibility = "visible";
 
     //Pilot & Copilot status
@@ -80,8 +72,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     pilotStatus.innerHTML = `Pilot ${pilotName} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilotName} is ready for launch`;
-
-    // Update list visibility after input validated
 
 
     //Fuel level, Cargo Mass and shuttle status
@@ -117,19 +107,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 async function myFetch() {
   let planetsReturned;
 
-//   planetsReturned = await fetch(
-//     "https://handlers.education.launchcode.org/static/planets.json"
-//   ).then(function (response) {});
-//   if (response.status >= 400) {
-//     throw new Error("Bad Response");
-//   } else return response.json();
-// }
-
-planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-  // console.log(`debugging planetsReturned: ${response.json()}`)
-return response.json();
-});
-// return response.json();
+  planetsReturned = await fetch(
+    "https://handlers.education.launchcode.org/static/planets.json"
+  ).then(function (response) {
+    return response.json();
+  });
+  return planetsReturned;
 }
 
 function pickPlanet(planets) {
