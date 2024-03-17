@@ -6,10 +6,6 @@ window.addEventListener("load", function() {
 
         console.log("window loaded");
 
-
-
-    // formsubmit button ID works but testForm form ID doesn't? added ID in HTMl and it works now
-    // also function only runs if I make formSubmission the submit function()
 // let form = document.querySelector("form"); //one way; purpose is getting form
 //OR 
     let form = document.getElementById("testForm");
@@ -33,7 +29,6 @@ window.addEventListener("load", function() {
 
         formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) 
         
-        console.log(`debugging: pilotName in script.js = ${pilotName}`);
         console.log("button being pushed");
     
     });
@@ -42,11 +37,11 @@ window.addEventListener("load", function() {
 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch();
+    // let listedPlanetsResponse = myFetch();
 
-    console.log(listedPlanetsResponse); //debugging
+    // console.log(listedPlanetsResponse); //debugging
 
-    listedPlanetsResponse.then(function (result) {
+    listedPlanetsResponse = myFetch().then(function (result) {
         listedPlanets = result;
         console.log(listedPlanets);
     }).then(function () {
@@ -54,15 +49,13 @@ window.addEventListener("load", function() {
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
         let selectedplanet = pickPlanet(listedPlanets);
         // addDestinationInfo(document, selectedplanet.name...)
-        addDestinationInfo(document, selectedplanetname, selectedplanet.diameter, selectedplanet.star, selectedplanet.distance, selectedplanet.moons, selectedplanet.imageUrl)
+        addDestinationInfo(document, selectedplanet.name, selectedplanet.diameter, selectedplanet.star, selectedplanet.distance, selectedplanet.moons, selectedplanet.imageUrl)
     })
     
     //NOTES TO EXPLORE
     //might have to write these functions, copy paste from textbook, check form validation
     // "I ended up skipping task 2 to complete task
     //  3 which was way easier. Just follow the fetch chapter’s stuff"
-
-    // "i did the getElementById for the pilot textbox but query selector for everything else"
     
     // "I got the inputs as an array with the class selector and just 
     // separated them out into individual variables by index"

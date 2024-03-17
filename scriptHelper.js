@@ -11,7 +11,7 @@ function addDestinationInfo(
   moons,
   imageUrl
 ) {
-  const missionTarget = document.querySelector("missionTarget");
+  const missionTarget = document.getElementById("missionTarget");
   let destinationInfo = "";
 
   destinationInfo = `<h2>Mission Destination</h2>
@@ -23,8 +23,6 @@ function addDestinationInfo(
         <li>Number of Moons: ${moons}</li>
     </ol>
     <img src="${imageUrl}">`;
-    
-console.log(destinationInfo);
 
   missionTarget.innerHTML = destinationInfo;
 }
@@ -127,10 +125,11 @@ async function myFetch() {
 //   } else return response.json();
 // }
 
-planetsReturned = await fetch(
-  "https://handlers.education.launchcode.org/static/planets.json"
-).then(function (response) {});
-return planetsReturned;
+planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+  // console.log(`debugging planetsReturned: ${response.json()}`)
+return response.json();
+});
+// return response.json();
 }
 
 function pickPlanet(planets) {
